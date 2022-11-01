@@ -5,7 +5,7 @@ import AddCompany from './components/CompanyList/AddCompany'
 import GetEmployees from './components/EmployeeList/GetEmployees'
 import EmployeeDetail from './components/EmployeeList/EmployeeDetail'
 import AddEmployee from './components/EmployeeList/AddEmployee'
-import UpdateEmployee from './components/EmployeeList/UpdateEmployee'
+
 const routes =  [
     {
         path: "/company",
@@ -33,10 +33,7 @@ const routes =  [
         path:"/company/:id/employees/add",
         component: AddEmployee
     },
-    {
-        path:"/company/:id/employees/:idEmployee/add",
-        component: UpdateEmployee
-    }
+    
     
     
    

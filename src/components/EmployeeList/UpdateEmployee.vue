@@ -1,25 +1,41 @@
 <template>
-  <button @click="isUpdate = !isUpdate">Update</button>
-  <div v-if="isUpdate">
-    <form @submit.prevent="updateEmployee">
-      <label for="">Name:</label>
-      <input
-        :value="name"
-        @input="(event) => $emit('update:name', event.target.value)"
-      />
-      <label for="">Email:</label>
-      <input
-        :value="mail"
-        @input="(event) => $emit('update:mail', event.target.value)"
-      />
-      <button @click="$emit('update-em')">Update Employee</button>
-    </form>
-  </div>
+  <ModalComponent @close="toggleModal" :modalActive="modalActive">
+    <div class="modal-content">
+      <form class="form - update">
+        <div class="form - group">
+          <label class=".control-label" for="">Name:</label>
+          <input
+            :value="name"
+            @input="(event) => $emit('update:name', event.target.value)"
+          />
+        </div>
+        <div class="form-grou">
+          <label for="">Email:</label>
+          <input
+            :value="mail"
+            @input="(event) => $emit('update:mail', event.target.value)"
+          />
+        </div>
+
+        <button class="btn btn-primary" @click="$emit('update-em')">
+          Update Employee
+        </button>
+      </form>
+    </div>
+  </ModalComponent>
+  <button @click="toggleModal" type="button" class="btn btn-info">
+    Update
+  </button>
 </template>
 <script>
+import ModalComponent from "./ModalComponent.vue";
+import { ref } from "vue";
 export default {
   emits: ["update-em"],
   props: ["name", "mail"],
+  components: {
+    ModalComponent,
+  },
   data() {
     return {
       isUpdate: false,
@@ -67,5 +83,17 @@ export default {
   //       return !this.isUpdate;
   //     },
   //   },
+  setup() {
+    const modalActive = ref(false);
+    const toggleModal = () => {
+      modalActive.value = !modalActive.value;
+    };
+    return { modalActive, toggleModal };
+  },
 };
 </script>
+<style>
+form.form.\-.update {
+  display: flex;
+}
+</style>
